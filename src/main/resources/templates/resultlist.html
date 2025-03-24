@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" style="width: 75%; margin-top: 50px;">
+        <div class="col-md-4">
+            <h1>Results</h1>
+        </div>
+        <!-- <div>
+            <h3><span sec:authentication="name"></span></h3>
+        </div> -->
+        <table class="table table-striped">
+            <tr>
+                <th>Exercise</th>
+                <th>Weight</th>
+                <th>Reps</th>
+                <th>Sets</th>
+                <th>RPE</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="result : ${results}">
+                <td th:text="${result.exercise.name}"></td>
+                <td th:text="${result.weight}"></td>
+                <td th:text="${result.amountOfReps}"></td>
+                <td th:text="${result.amountOfSets}"></td>
+                <td th:text="${result.rpe}"></td>
+                <td th:text="${result.date}"></td>
+            </tr>
+
+        </table>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Exercises</title>
+</head>
+<body>
+    <div style="margin-left: 20px;">
+        <h1>Exercises</h1>
+        <table>
+            <tr th:each="exercise : ${exercises}">
+                <td th:text="${exercise.name}"></td>
+                <td>
+                    <form th:action="@{/deleteexerc/{id}(id=${exercise.exerciseId})}" method="get" style="padding-left: 140px; ;"> 
+                        <button type="submit" class="btn btn-danger"> Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <form action="/addexerc" method="get">
+                <button type="submit" class="btn btn-success">Add new Exercice</button>
+            </form>
+            <br>
+            <form action="/resultlist" method="get">
+                <button type="submit" class="btn btn-danger">Back to Results</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

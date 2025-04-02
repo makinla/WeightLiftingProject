@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Categories</title>
+</head>
+
+<body>
+    <div style="margin-left: 20px;">
+        <h1>Categories</h1>
+        <table>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.categoryName}"></td>
+                <td>
+                    <form th:action="@{/deletecategory/{id}(id=${category.categoryId})}" method="get" style="padding-left: 150px; ;"> 
+                        <button type="submit" class="btn btn-danger"> Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <form action="/addcategory" method="get">
+            <button type="submit" class="btn btn-success">Add new Category</button>
+        </form>
+        <br>
+        <form action="/resultlist" method="get">
+            <button type="submit" class="btn btn-danger">Back to Results</button>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

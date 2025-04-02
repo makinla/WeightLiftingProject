@@ -12,13 +12,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Exercise {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long exerciseId;
+    private Long exerciseId;
+
+    @NotNull
+    @Size(min=3, max=100, message = "The exercise name must be between 3 and 100 characters")
     private String name;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercise")
@@ -38,11 +43,11 @@ public class Exercise {
         this.category = category;
     }
    
-    public long getExerciseId() {
+    public Long getExerciseId() {
         return exerciseId;
     }
 
-    public void setExerciseId(long exerciseId) {
+    public void setExerciseId(Long exerciseId) {
         this.exerciseId = exerciseId;
     } 
 
@@ -73,18 +78,6 @@ public class Exercise {
     @Override
     public String toString() {
         return "Exercise [exerciseId=" + exerciseId + ", name=" + name + ", category=" + category + "]";
-    }
-
-    
-
-
-
-
-    
-    
-
-
-
-    
+    } 
 
 }

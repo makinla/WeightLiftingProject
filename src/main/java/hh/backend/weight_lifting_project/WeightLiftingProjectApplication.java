@@ -1,5 +1,6 @@
 package hh.backend.weight_lifting_project;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.slf4j.Logger;
@@ -41,11 +42,11 @@ public class WeightLiftingProjectApplication {
 			Exercise exercise3 = new Exercise("Bench Press", category2);
 			eRepository.save(exercise3);
 
-			rRepository.save(new Result(50.0, 2, 1, 6, LocalDate.of(2024, 12, 15), exercise3));
-			rRepository.save(new Result(80.0, 1, 1, 4, LocalDate.of(2025, 3, 5), exercise2));
-			rRepository.save(new Result(60.0, 2, 3, 7, LocalDate.of(2024, 11, 9), exercise1));
-			rRepository.save(new Result(74.0, 1, 8, 3, LocalDate.of(2024, 12, 27), exercise2));
-			rRepository.save(new Result(40.0, 8, 3, 6, LocalDate.of(2025, 1, 17), exercise3));
+			rRepository.save(new Result(BigDecimal.valueOf(50.0), 2, 1, 6, LocalDate.of(2024, 12, 15), exercise3));
+			rRepository.save(new Result(BigDecimal.valueOf(80.0), 1, 1, 4, LocalDate.of(2025, 3, 5), exercise2));
+			rRepository.save(new Result(BigDecimal.valueOf(60.0), 2, 3, 7, LocalDate.of(2024, 11, 9), exercise1));
+			rRepository.save(new Result(BigDecimal.valueOf(74.0), 1, 8, 3, LocalDate.of(2024, 12, 27), exercise2));
+			rRepository.save(new Result(BigDecimal.valueOf(40.0), 8, 3, 6, LocalDate.of(2025, 1, 17), exercise3));
 
 			log.info("fetch all categories");
 			for (Category category : cRepository.findAll()) {

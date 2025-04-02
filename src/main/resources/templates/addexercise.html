@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Add Exercise</title>
+</head>
+
+<body>
+    <div style="margin-left: 20px;">
+        <h1>Add Exercise</h1>
+        <form th:object="${exercise}" th:action="@{saveexercise}" action="#" method="post">
+            <label for="deplist">Category:</label>
+            <select id="deplist" th:field="*{category}" class="form-control" style="width: auto; min-width: 250px;">
+                <option th:each="categ: ${categories}" th:value="${categ.categoryId}" th:text="${categ.categoryName}"></option>
+            </select>
+            <label for="name" style="margin-top: 10px";>Exercise name:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" th:field="*{name}">
+                <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></div>
+            </div>
+            <br>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <input type="submit" value="Save" class="btn btn-success">
+        </form>
+        <form action="/resultlist" method="get">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </form>
+            </div>
+    </div>
+
+</body>
+
+</html>

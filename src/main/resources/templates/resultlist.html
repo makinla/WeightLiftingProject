@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Results</title>
 </head>
 <body>
     <div class="container" style="width: 75%; margin-top: 50px;">
@@ -32,9 +33,31 @@
                 <td th:text="${result.amountOfSets}"></td>
                 <td th:text="${result.rpe}"></td>
                 <td th:text="${result.date}"></td>
+                <td>
+                    <form th:action="@{/delete/{id}(id=${result.id})}" method="get"> 
+                        <button type="submit" class="btn btn-danger"> Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/edit/{id}(id=${result.id})}" method="get">
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                </td>
             </tr>
-
         </table>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+            <form action="/add" method="get">
+                <button type="submit" class="btn btn-primary">Add new Result</button>
+            </form>
+            <!-- Rajaa alla oleva koodi vain adminille -->
+            <form action="/addexerc" method="get">
+                <button type="submit" class="btn btn-primary">Add new Exercise</button>
+            </form>
+            <!-- Rajaa alla oleva koodi vain adminille -->
+            <form action="/addcategory" method="get">
+                <button type="submit" class="btn btn-primary">Add new Category</button>
+            </form>
+        </div>
     </div>
     
 </body>

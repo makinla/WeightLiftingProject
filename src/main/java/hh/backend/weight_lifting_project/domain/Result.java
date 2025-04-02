@@ -1,7 +1,8 @@
 package hh.backend.weight_lifting_project.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -10,17 +11,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity 
 public class Result {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
-    private double weight;
+    private Long id;
+
+    // Kirjain syötteellä tulee edelleen väärä virhekoodi
+    @NotNull(message = "The weight field cannot be empty")
+    @Digits(integer = 3, fraction = 2, message = "The weight must be a number less than 1000 with up to two decimal places.")
+    private BigDecimal weight;
+
+    @Min(value = 1, message = "The amount must be at least 1")
     private int amountOfReps;
     private int amountOfSets;
     private int rpe;
+    
+    @JsonFormat(pattern = "dd.MM.yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
     
     @ManyToOne
@@ -35,7 +47,7 @@ public class Result {
 
     public Result() {}
     
-    public Result(double weight, int amountOfReps, int amountOfSets, int rpe, LocalDate date, Exercise exercise) {
+    public Result(BigDecimal weight, int amountOfReps, int amountOfSets, int rpe, LocalDate date, Exercise exercise) {
         super();
         this.weight = weight;
         this.amountOfReps = amountOfReps;
@@ -46,19 +58,19 @@ public class Result {
         // this.appUser = appUser;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public double getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 

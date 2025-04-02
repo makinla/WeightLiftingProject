@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Category {
@@ -17,7 +19,10 @@ public class Category {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long categoryId;
-    private String name;
+
+    @NotNull
+    @Size(min=3, max=50, message = "The category name must be between 3 and 50 characters")
+    private String categoryName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     @JsonIgnoreProperties ("category")
@@ -25,9 +30,9 @@ public class Category {
     
     public Category() {}
 
-    public Category(String name) {
+    public Category(String categoryName) {
         super();
-        this.name = name;
+        this.categoryName = categoryName;
     }
 
     public Long getCategoryId() {
@@ -38,12 +43,12 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public List<Exercise> getExercises() {
@@ -56,7 +61,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category [categoryId=" + categoryId + ", name=" + name + "]";
+        return "Category [categoryId=" + categoryId + ", name=" + categoryName + "]";
     }
   
 }

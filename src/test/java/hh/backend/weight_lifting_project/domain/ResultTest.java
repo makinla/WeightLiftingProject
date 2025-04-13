@@ -14,10 +14,17 @@ public class ResultTest {
     @Autowired
     private ResultRepository repository;
 
+    @Autowired
+    private ExerciseRepository erepository;
+
     @Test
     public void createNewResult() {
-        Result result = new Result(BigDecimal.valueOf(10.0), 2, 1, 9, LocalDate.of(2024, 12, 15), new Exercise("Pull up", new Category("Calisthenics")));
+        Exercise exercise = new Exercise("Pull Up", new Category("Calisthenics"));
+		erepository.save(exercise);
+
+        Result result = new Result(BigDecimal.valueOf(10.0), 2, 1, 9, LocalDate.of(2024, 12, 15), exercise, new AppUser("lifter", "$2a$10$iQZXOHM7DbT6hFOd445AZOkFQuI6OYHICLKucneGSIi/Cs830O4QK", "USER"));
         repository.save(result);
         assertThat(result.getId()).isNotNull();
     }
+
 }

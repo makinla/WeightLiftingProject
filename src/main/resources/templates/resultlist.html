@@ -10,11 +10,8 @@
 <body>
     <div class="container" style="width: 75%; margin-top: 50px;">
         <div>
-            <h1>Weight lifting results</h1>
+            <h1><span th:text="${#strings.capitalize(#authentication.name)}"></span>'s Weight lifting results</h1>
         </div>
-        <!-- <div>
-            <h3><span sec:authentication="name"></span></h3>
-        </div> -->
         <table class="table table-striped">
             <tr>
                 <th>Exercise</th>

@@ -46,14 +46,14 @@ public class Result {
     @NotNull(message = "Category and exercise must be selected")
     private Exercise exercise;
 
-    // @ManyToOne 
-    // @JsonIgnoreProperties ("appUsers")
-    // @JoinColumn (name = "appUserId")
-    // private AppUser appUser;
+    @ManyToOne 
+    @JsonIgnoreProperties ("appUsers")
+    @JoinColumn (name = "appUserId")
+    private AppUser appUser;
 
     public Result() {}
     
-    public Result(BigDecimal weight, int amountOfReps, int amountOfSets, int rpe, LocalDate date, Exercise exercise) {
+    public Result(BigDecimal weight, int amountOfReps, int amountOfSets, int rpe, LocalDate date, Exercise exercise, AppUser appUser) {
         super();
         this.weight = weight;
         this.amountOfReps = amountOfReps;
@@ -61,7 +61,7 @@ public class Result {
         this.rpe = rpe;
         this.date = date;
         this.exercise = exercise;
-        // this.appUser = appUser;
+        this.appUser = appUser;
     }
 
     public Long getId() {
@@ -120,13 +120,13 @@ public class Result {
         this.exercise = exercise;
     }
 
-    // public AppUser getAppUser() {
-    //     return appUser;
-    // }
+    public AppUser getAppUser() {
+        return appUser;
+    }
 
-    // public void setAppUser(AppUser appUser) {
-    //     this.appUser = appUser;
-    // }
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     @Override
     public String toString() {

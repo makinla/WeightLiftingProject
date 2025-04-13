@@ -1,10 +1,16 @@
 package hh.backend.weight_lifting_project.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name="users")
 public class AppUser {
@@ -22,6 +28,10 @@ public class AppUser {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appUser")
+    @JsonIgnoreProperties ("appUser")
+    private List<Result> results;
 
     public AppUser() {
     }
@@ -65,4 +75,11 @@ public class AppUser {
         this.role = role;
     }
 
+    public List<Result> getResults() {
+            return results;
+        }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
 }

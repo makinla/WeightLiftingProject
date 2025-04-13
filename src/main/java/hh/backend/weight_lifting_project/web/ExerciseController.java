@@ -38,17 +38,22 @@ public class ExerciseController {
     }
 
     @PostMapping("/saveexercise")
-    public String saveExercise(@Valid @ModelAttribute("exercise") Exercise exercise, BindingResult bindingResult, Model model) {
+    public String saveExercise(@Valid @ModelAttribute("exercise") Exercise exercise, BindingResult bindingResult,
+            Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", crepository.findAll());
             return "addexercise";
+        } else if (repository.existsByName(exercise.getName())) {
+            bindingResult.rejectValue("name", "duplicate", "An exercise with this name already exists.");
+            model.addAttribute("categories", crepository.findAll());
+            return "addexercise";
         } else {
-        repository.save(exercise);
-        return "redirect:exerciselist";
+            repository.save(exercise);
+            return "redirect:exerciselist";
         }
     }
 
-    @GetMapping ("/deleteexerc/{id}")
+    @GetMapping("/deleteexerc/{id}")
     public String deleteResult(@PathVariable("id") Long exerciseId, Model model) {
         repository.deleteById(exerciseId);
         return "redirect:../exerciselist";

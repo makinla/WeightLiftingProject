@@ -37,6 +37,9 @@ public class CategoryController {
     public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "addcategory";
+        } else if (repository.existsByCategoryName(category.getCategoryName())) {
+            bindingResult.rejectValue("categoryName", "duplicate", "A category with this name already exists.");
+            return "addcategory";
         } else {
         repository.save(category);
         return "redirect:categorylist";

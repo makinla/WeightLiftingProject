@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -24,12 +25,17 @@ public class Result {
 
     // Kirjain syötteellä tulee edelleen väärä virhekoodi
     @NotNull(message = "The weight field cannot be empty")
+    @Min(value = 1, message = "The weight must be at least 1")
     @Digits(integer = 3, fraction = 2, message = "The weight must be a number less than 1000 with up to two decimal places.")
     private BigDecimal weight;
 
     @Min(value = 1, message = "The amount must be at least 1")
     private int amountOfReps;
+    @Min(value = 1, message = "The amount must be at least 1")
     private int amountOfSets;
+
+    @Min(value = 1, message = "The RPE must be between 1 and 10")
+    @Max(value = 10, message = "The RPE must be between 1 and 10")
     private int rpe;
     
     @JsonFormat(pattern = "dd.MM.yyyy", shape = JsonFormat.Shape.STRING)
@@ -38,6 +44,7 @@ public class Result {
     @ManyToOne
     @JsonIgnoreProperties ("results")
     @JoinColumn(name = "exerciseId")
+    @NotNull(message = "Category and exercise must be selected")
     private Exercise exercise;
 
     // @ManyToOne 

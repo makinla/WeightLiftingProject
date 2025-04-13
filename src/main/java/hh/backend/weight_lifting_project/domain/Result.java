@@ -2,6 +2,9 @@ package hh.backend.weight_lifting_project.domain;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,6 +18,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity 
 public class Result {
@@ -38,6 +42,7 @@ public class Result {
     @Max(value = 10, message = "The RPE must be between 1 and 10")
     private int rpe;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     
     @ManyToOne

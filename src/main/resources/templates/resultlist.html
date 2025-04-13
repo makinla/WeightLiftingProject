@@ -46,13 +46,16 @@
             <form action="/add" method="get">
                 <button type="submit" class="btn btn-primary">Add new Result</button>
             </form>
-            <!-- Rajaa alla oleva koodi vain adminille -->
+            
             <form sec:authorize="hasAuthority('ADMIN')" action="/addexerc" method="get">
                 <button type="submit" class="btn btn-primary">Add new Exercise</button>
             </form>
-            <!-- Rajaa alla oleva koodi vain adminille -->
+            
             <form sec:authorize="hasAuthority('ADMIN')" action="/addcategory" method="get">
                 <button type="submit" class="btn btn-primary">Add new Category</button>
+            </form>
+            <form action="/login" method="get">
+                <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </div>
     </div>

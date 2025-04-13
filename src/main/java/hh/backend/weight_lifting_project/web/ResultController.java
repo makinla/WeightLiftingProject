@@ -109,7 +109,7 @@ public class ResultController {
     }
 
     @PostMapping("/save")
-    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, @RequestParam("selectedCategory") Long selectedCategoryId, Model model) {
+    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, @RequestParam(value = "selectedCategory", required = false) Long selectedCategoryId, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", crepository.findAll());
             model.addAttribute("selectedCategory", selectedCategoryId);

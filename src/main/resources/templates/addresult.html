@@ -43,9 +43,7 @@
             </div>
             <br>
             <label for="date">Date:</label>
-            <input type="date" th:field="*{date}">
-            <div style="clear: both; display: block; height: 10px;" th:if="${#fields.hasErrors('date')}"
-                class="text-danger" th:errors="*{date}"></div>
+            <input type="date" th:field="*{date}" th:attr="max=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
             <br>
             <label for="alternatives">Category:</label>
             <br>

@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import hh.backend.weight_lifting_project.domain.AppUser;
+import hh.backend.weight_lifting_project.domain.AppUserRepository;
 import hh.backend.weight_lifting_project.domain.Category;
 import hh.backend.weight_lifting_project.domain.CategoryRepository;
 import hh.backend.weight_lifting_project.domain.Exercise;
@@ -27,7 +29,7 @@ public class WeightLiftingProjectApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(CategoryRepository cRepository, ExerciseRepository eRepository, ResultRepository rRepository) {
+	public CommandLineRunner demo(CategoryRepository cRepository, ExerciseRepository eRepository, ResultRepository rRepository, AppUserRepository uRepository) {
 		return (args) -> {
 			log.info("save a couple results");
 			Category category1 = new Category("Lower Body");
@@ -48,11 +50,15 @@ public class WeightLiftingProjectApplication {
 			rRepository.save(new Result(BigDecimal.valueOf(74.0), 1, 8, 3, LocalDate.of(2024, 12, 27), exercise2));
 			rRepository.save(new Result(BigDecimal.valueOf(40.0), 8, 3, 6, LocalDate.of(2025, 1, 17), exercise3));
 
+			AppUser user1 = new AppUser("user", "$2a$10$.HPh.2w0qOWlhkiL7iY6Tu7fqgW7c4JOeMevu7T8lrRrinXfsewZO", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$n01kJPgoY9VX9Rb/0/2sMeknpUyjqbbJuYUyVW/vHwsV2Z0rclIES", "ADMIN");
+			uRepository.save(user1);
+			uRepository.save(user2);
+
 			log.info("fetch all categories");
 			for (Category category : cRepository.findAll()) {
 				log.info(category.toString());
 			
-
 			}
 
 		};

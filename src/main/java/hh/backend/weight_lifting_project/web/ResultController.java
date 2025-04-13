@@ -51,18 +51,23 @@ public class ResultController {
 
     @GetMapping("/edit/{id}")
     public String editResult(@PathVariable("id") Long resultId, Model model) {
-        model.addAttribute("result", repository.findById(resultId));
-        model.addAttribute("exercises", erepository.findAll());
+        Result result = repository.findById(resultId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        Long selectedCategoryId = result.getExercise().getCategory().getCategoryId();
+
+        model.addAttribute("result", result);
         model.addAttribute("categories", crepository.findAll());
+        model.addAttribute("selectedCategory", selectedCategoryId);
+        model.addAttribute("exercises", erepository.findByCategory_CategoryId(selectedCategoryId));
         return "editresult";
     }
 
     @PostMapping("/edited")
-    public String saveEditedResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult,
+    public String saveEditedResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, @RequestParam("selectedCategory") Long selectedCategoryId,
             Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("exercises", erepository.findAll());
             model.addAttribute("categories", crepository.findAll());
+            model.addAttribute("selectedCategory", selectedCategoryId);
+            model.addAttribute("exercises", erepository.findByCategory_CategoryId(selectedCategoryId));
             return "editresult";
         } else {
             repository.save(result);
@@ -89,10 +94,11 @@ public class ResultController {
     }
 
     @PostMapping("/save")
-    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, Model model) {
+    public String saveResult(@Valid @ModelAttribute("result") Result result, BindingResult bindingResult, @RequestParam("selectedCategory") Long selectedCategoryId, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("exercises", erepository.findAll());
             model.addAttribute("categories", crepository.findAll());
+            model.addAttribute("selectedCategory", selectedCategoryId);
+            model.addAttribute("exercises", erepository.findByCategory_CategoryId(selectedCategoryId));
             return "addresult";
         } else {
             repository.save(result);

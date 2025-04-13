@@ -38,7 +38,6 @@ public class Result {
     @Max(value = 10, message = "The RPE must be between 1 and 10")
     private int rpe;
     
-    @JsonFormat(pattern = "dd.MM.yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
     
     @ManyToOne

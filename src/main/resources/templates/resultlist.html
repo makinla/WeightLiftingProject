@@ -50,11 +50,11 @@
                 <button type="submit" class="btn btn-primary">Add new Result</button>
             </form>
             <!-- Rajaa alla oleva koodi vain adminille -->
-            <form action="/addexerc" method="get">
+            <form sec:authorize="hasAuthority('ADMIN')" action="/addexerc" method="get">
                 <button type="submit" class="btn btn-primary">Add new Exercise</button>
             </form>
             <!-- Rajaa alla oleva koodi vain adminille -->
-            <form action="/addcategory" method="get">
+            <form sec:authorize="hasAuthority('ADMIN')" action="/addcategory" method="get">
                 <button type="submit" class="btn btn-primary">Add new Category</button>
             </form>
         </div>

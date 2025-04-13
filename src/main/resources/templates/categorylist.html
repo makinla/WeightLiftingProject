@@ -16,13 +16,13 @@
                 <td th:text="${category.categoryName}"></td>
                 <td>
                     <form th:action="@{/deletecategory/{id}(id=${category.categoryId})}" method="get" style="padding-left: 150px; ;"> 
-                        <button type="submit" class="btn btn-danger"> Delete</button>
+                        <button sec:authorize="hasAuthority('ADMIN')" type="submit" class="btn btn-danger"> Delete</button>
                     </form>
                 </td>
             </tr>
         </table>
         <div style="display: flex; gap: 10px; margin-top: 10px;">
-        <form action="/addcategory" method="get">
+        <form sec:authorize="hasAuthority('ADMIN')" action="/addcategory" method="get">
             <button type="submit" class="btn btn-success">Add new Category</button>
         </form>
         <br>

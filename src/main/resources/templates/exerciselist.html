@@ -14,13 +14,13 @@
                 <td th:text="${exercise.name}"></td>
                 <td>
                     <form th:action="@{/deleteexerc/{id}(id=${exercise.exerciseId})}" method="get" style="padding-left: 140px; ;"> 
-                        <button type="submit" class="btn btn-danger"> Delete</button>
+                        <button sec:authorize="hasAuthority('ADMIN')" type="submit" class="btn btn-danger"> Delete</button>
                     </form>
                 </td>
             </tr>
         </table>
         <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <form action="/addexerc" method="get">
+            <form sec:authorize="hasAuthority('ADMIN')" action="/addexerc" method="get">
                 <button type="submit" class="btn btn-success">Add new Exercice</button>
             </form>
             <br>

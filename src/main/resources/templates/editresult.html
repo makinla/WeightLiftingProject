@@ -59,6 +59,11 @@
             <br>
             <label for="deplist">Exercise:</label>
             <select id="deplist" th:field="*{exercise}" class="form-control" style="width: auto; min-width: 250px;">
+                <option disabled th:if="${exercises == null}" selected>Select Exercise</option>
+                <option th:each="exerc : ${exercises}"
+                        th:value="${exerc.exerciseId}"
+                        th:text="${exerc.name}">
+                </option>
             </select>
             <div style="clear: both; display: block; height: 10px;" th:if="${#fields.hasErrors('exercise')}"
                 class="text-danger" th:errors="*{exercise}"></div>

@@ -1,5 +1,6 @@
 package hh.backend.weight_lifting_project.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/addexerc")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addExercise(Model model) {
         model.addAttribute("exercise", new Exercise());
         model.addAttribute("categories", crepository.findAll());
@@ -38,6 +40,7 @@ public class ExerciseController {
     }
 
     @PostMapping("/saveexercise")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveExercise(@Valid @ModelAttribute("exercise") Exercise exercise, BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
@@ -54,6 +57,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/deleteexerc/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteResult(@PathVariable("id") Long exerciseId, Model model) {
         repository.deleteById(exerciseId);
         return "redirect:../exerciselist";
